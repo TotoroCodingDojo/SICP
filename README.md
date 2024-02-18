@@ -4,7 +4,7 @@
 2. [Building abstraction with data](02-building-abstractions-with-data/README.md)
 3. [Modularity and objects state](03-modularity-objects-state/README.md)
 4. [Metalinguistic Abstraction](04-metalinguistic-abstraction/README.md)
-5. [Computing with register machines](05-computing-with-register-machines/)
+5. [Computing with register machines](05-computing-with-register-machines/README.md)
 
 ## How to code in scheme?
 
