@@ -22,7 +22,7 @@
 (define size 2)
 ```
 
-It should be clear that the possiblity of associating values with symbols and later retriving them
+It should be clear that the possibility of associating values with symbols and later retrieving them
 means that the interpreter must maintain some sort of memory that keep track of name object pairs.
 This memory is called the *environment*.
 
@@ -112,3 +112,63 @@ $$
 - `(and <e1> ... <en>)`
 - `(or <e1> ... <en>)`
 - `(not <e>)`
+
+## Example: Square Root By Newtons Method
+
+Newtons method is used to find roots of a function.
+That is the value for which the function value is $0$.
+
+So if we want to find square root of $x_0$, finding the
+root of function $f(x) = x^2 - x_0$ will give the answer.
+
+### Newton's Method
+
+**Intuition:** Given a function, now for every value in the domain of that function
+the tangent to that point intersect the x-axis at a point which is different, but
+only for the point which are root the tangent intersect only at one point.
+
+Let $x_n$ be your current guess, then
+
+$$
+f'(x_n) = \frac{0 - 0f(x_n)}{x_{n+1} - x_n}
+$$
+
+solving for $x_{n+1}$ till we get a good approximation will give the result.
+
+Given $f(x)$, the root of function can be obtained using:
+
+$$
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}
+$$
+
+### For square root
+
+$$
+f(x) =  x^2 - x_0, \\
+f'(x) = 2x, \\
+x_{n+1} = x_n - \frac{x_n^2 - x_0}{2x_n} = \frac{x_n^2 + x_0}{2x_n}
+$$
+
+```lisp
+(define (square-iter guess x)
+    (if (good-enough? guess x)
+        guess
+        (square-iter (improve guess x) x)
+    )
+)
+```
+
+```lisp
+(define (good-enough? guess x)
+    (<
+        (abs (- (* guess guess) x))
+        0.001
+    )
+)
+```
+
+```lisp
+(define (improve guess x)
+    (average guess )
+)
+```
