@@ -146,7 +146,11 @@ $$
 $$
 f(x) =  x^2 - x_0, \\
 f'(x) = 2x, \\
-x_{n+1} = x_n - \frac{x_n^2 - x_0}{2x_n} = \frac{x_n^2 + x_0}{2x_n}
+x_{n+1} = x_n - \frac{x_n^2 - x_0}{2x_n} = \frac{x_n^2 + x_0}{2x_n} = \frac{1}{2}\left(x_n + \frac{x_0}{x_n}\right)
+$$
+
+$$
+\text{Improved Guess} = \frac{1}{2}\left(\text{Guess} + \frac{x_0}{\text{Guess}}\right)
 $$
 
 ```lisp
@@ -169,6 +173,25 @@ $$
 
 ```lisp
 (define (improve guess x)
-    (average guess )
+    (average guess (/ x guess))
 )
+```
+
+```lisp
+(define (sqrt x)
+    (sqrt-iter 1.0 x)
+)
+```
+
+```lisp
+(define (sqrt x)
+    (define (good-enough? guess)
+        (< (abs (- (square guess) x)) 0.001))
+    (define (improve guess)
+        (average guess (/ x guess)))
+    (define (sqrt-iter guess)
+        (if (good-enough? guess)
+            guess
+            (sqrt-iter (improve guess))))
+    (sqrt-iter 1.0))
 ```
